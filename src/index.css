@@ -1,0 +1,13 @@
+#mymap {
+    height: 500px;
+    width: 800px;
+    background: none;
+}
+
+@keyframes fade {
+    from { opacity: 0.5; }
+}
+
+.blinking {
+    animation: fade 1s infinite alternate;
+}
