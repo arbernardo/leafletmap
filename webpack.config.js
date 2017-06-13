@@ -18,7 +18,16 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.(jpe?g|png|svg|gif)$/,
+                loader: "file-loader"
             }
         ]
+    },
+
+    devServer: {
+        inline: true,
+        port: 3000
     }
 }

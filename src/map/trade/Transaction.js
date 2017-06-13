@@ -2,8 +2,6 @@
  * Created by ace on 6/5/17.
  */
 
-import TradeMarker from './transport/TradeMarker';
-
 export default class Transaction {
     constructor({
         modeOfTransport,
@@ -15,15 +13,7 @@ export default class Transaction {
         if (!modeOfTransport || !from || !to) {
             console.error("route, from, and to attributes are required.");
         } else {
-            if (pathway.length) {
-                //if there is pathway(s) then create a path for each to and from, ie. [from, ...pathway, to]
-                //Allow for arrays of mode of transport.
-            } else {
-                Object.assign(this, {modeOfTransport, pathway, from, to});
-
-                //initialize mode of transport
-                modeOfTransport.length ? modeOfTransport[0].init(this) : modeOfTransport.init(this);
-            }
+            Object.assign(this, {modeOfTransport, pathway, from, to});
         }
     }
 
@@ -47,25 +37,20 @@ export default class Transaction {
         return this;
     }
 
-    _draw(){
+    init(){
         const {
-            paths,
-            marker,
-            polyline,
-        } = this.modeOfTransport;
+            from,
+            to,
+            pathway,
+            modeOfTransport
+        } = this;
 
-        if (!(marker instanceof L.Marker)) {
-            this.modeOfTransport.marker = this._createMarker(paths, marker);
+        if (pathway.length) {
+            //if there is pathway(s) then create a path for each to and from, ie. [from, ...pathway, to]
+            //Allow for arrays of mode of transport.
+        } else {
+            //initialize mode of transport
+            modeOfTransport.length ? modeOfTransport[0].init(this.getType(from, to)) : modeOfTransport.init(this.getType(from, to));
         }
-
-        if (polyline !== "none"){
-            if (!(polyline instanceof L.Polyline)){
-                this.modeOfTransport.polyline = this.createPolyline(paths, polyline);
-            }
-        }
-    }
-
-    _createMarker(paths, marker) {
-        return new TradeMarker({paths, ...marker});
     }
 }

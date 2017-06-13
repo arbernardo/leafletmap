@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --inline --content-base public/"
+    "start": "webpack-dev-server --content-base public/"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "babel-preset-env": "^1.5.2",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
     "style-loader": "^0.18.2",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"

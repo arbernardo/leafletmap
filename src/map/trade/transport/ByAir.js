@@ -4,6 +4,7 @@
 import L from 'leaflet';
 import 'leaflet-arc';
 import ModeOfTransport from './ModeOfTransport';
+import AirPlaneIcon from '../../../assets/icons/plane2.png';
 
 //Usage
 // new ByAir({marker: {...options}, polyline: {...options}})
@@ -12,19 +13,32 @@ export default class ByAir extends ModeOfTransport{
     constructor(params = {}){
         super(params);
 
-        const {vertices = [200]} = params;
+        const {
+            vertices = [200],
+            marker = {}
+        } = params;
 
-        Object.assign(this, {vertices});
+        const proxy = new Proxy(marker, {
+            get: (target, property) => {
+                if (!(property in target)){
+                    target[property] = {}
+                }
+                return target[property];
+            }
+        });
+
+        if (!proxy.options.icon){
+            proxy.options.icon = L.icon({
+                iconUrl: AirPlaneIcon,
+                iconSize: [40, 25]
+            });
+        };
+
+        Object.assign(this, {vertices, marker});
     }
 
-    init(transaction){
 
-        const {
-            from,
-            to
-        } = transaction;
-
-        const points = transaction.getType(from, to);
+    generatePaths(points){
 
         let pathArr = [];
         let vertices = this.vertices;
@@ -36,14 +50,15 @@ export default class ByAir extends ModeOfTransport{
             pathArr.push(arc._latlngs);
         }
 
-        this.pathArr = pathArr;
-        this.paths = [].concat.apply([], pathArr);
+        let paths = [].concat.apply([], pathArr);
 
-        transaction._draw();
+        return {
+            pathArr,
+            paths
+        }
     }
 
     createArc(origin, destination) {
         return L.Polyline.Arc(origin, destination, {vertices: this.vertices});
     }
-
 }

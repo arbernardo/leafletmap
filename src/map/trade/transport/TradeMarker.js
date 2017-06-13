@@ -8,7 +8,7 @@ export default class TradeMarker {
     constructor(params){
         const {
             paths,
-            durations = 2000,
+            durations = 4000,
             options = {}
         } = params;
 

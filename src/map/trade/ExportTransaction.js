@@ -7,14 +7,23 @@ import TradePolyline from './transport/TradePolyline';
 export default class ExportTransaction extends Transaction {
     constructor(params){
         super(params);
+
+        this.setDefaults();
+        this.init();
     }
 
     getType(p1, p2){
         return [p1, p2];
     }
 
-    createPolyline(paths, polyline) {
-        return new TradePolyline({paths, options: {color: "blue", ...polyline}});
+    setDefaults(){
+        const {
+            polyline = {}
+        } = this.modeOfTransport;
+
+        if (polyline !== "none" && !polyline.color){
+            this.modeOfTransport.polyline = {color: "blue"};
+        }
     }
 
 }
