@@ -4,7 +4,7 @@
 import L from 'leaflet';
 import 'leaflet-arc';
 import ModeOfTransport from './ModeOfTransport';
-import AirPlaneIcon from '../../../assets/icons/plane2.png';
+import AirPlaneIcon from '../../../assets/icons/airplane.png';
 
 //Usage
 // new ByAir({marker: {...options}, polyline: {...options}})
@@ -30,7 +30,8 @@ export default class ByAir extends ModeOfTransport{
         if (!proxy.options.icon){
             proxy.options.icon = L.icon({
                 iconUrl: AirPlaneIcon,
-                iconSize: [40, 25]
+                iconSize: [25, 25],
+                // className: "blinking"
             });
         };
 

@@ -2,7 +2,14 @@
     height: 500px;
     width: 800px;
     background: none;
+    overflow: hidden;
 }
+
+/*.circles {*/
+    /*stroke: "black";*/
+    /*opacity: .6;*/
+    /*fill: "red"*/
+/*}*/
 
 @keyframes fade {
     from { opacity: 0.5; }

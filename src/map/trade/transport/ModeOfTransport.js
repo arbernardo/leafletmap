@@ -18,7 +18,6 @@ export default class ModeOfTransport {
 
     defaultMarker() {
         const {paths, marker} = this;
-        console.log("marker is", marker);
         return new TradeMarker({paths, ...marker});
     }
 
@@ -29,7 +28,6 @@ export default class ModeOfTransport {
 
     init(points){
         const pathObj = this.generatePaths(points);
-        console.log(pathObj);
         Object.assign(this, pathObj);
         this.generateDefaults();
     }

@@ -2,7 +2,7 @@
  * Created by ace on 6/5/17.
  */
 import ModeOfTransport from './ModeOfTransport';
-import ShipIcon from '../../../assets/icons/boat.png';
+import ShipIcon from '../../../assets/icons/ship.png';
 
 const IvoryCoast_Angola = [
     {lat: 4.390228926463396, lng: -4.218750000000001},
@@ -14,8 +14,7 @@ const IvoryCoast_Angola = [
     {lat: -10.574222078332806, lng: 8.437500000000002},
     {lat: -11.092165893502, lng: 10.195312500000002},
     {lat: -11.60919340793894, lng: 12.304687500000002}
-]
-console.log("ship icon", ShipIcon);
+];
 export default class BySea extends ModeOfTransport{
     constructor(params = {}){
         super(params);
@@ -36,7 +35,7 @@ export default class BySea extends ModeOfTransport{
         if (!proxy.options.icon){
             proxy.options.icon = L.icon({
                 iconUrl: ShipIcon,
-                iconSize: [25, 25]
+                iconSize: [50, 25]
             });
         };
 

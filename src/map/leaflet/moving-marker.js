@@ -290,11 +290,19 @@ L.Marker.MovingMarker = L.Marker.extend({
 
         if (elapsedTime != null) {
             // compute the position
-            var p = L.interpolatePosition(this._currentLine[0],
-                this._currentLine[1],
+            var p1 = this._currentLine[0],
+                p2 = this._currentLine[1];
+            var p = L.interpolatePosition(p1,
+                p2,
                 this._currentDuration,
                 elapsedTime);
             this.setLatLng(p);
+            var angleDeg = Math.atan2(p2.lng - p1.lng, p2.lat - p1.lat) * 180 / Math.PI;
+            if (!this.doneOrigin){
+                this._icon.style[L.DomUtil.TRANSFORM+"Origin"] += "center";
+                this.doneOrigin = true;
+            }
+            this._icon.style[L.DomUtil.TRANSFORM] += ' rotateZ(' + angleDeg + 'deg)';
         }
 
         if (! noRequestAnim) {

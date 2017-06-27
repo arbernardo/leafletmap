@@ -21,7 +21,20 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|svg|gif)$/,
-                loader: "file-loader"
+                loader: "url-loader"
+            },
+            {
+                test: /\.json$/,
+                loader: "url-loader"
+            },
+            {
+                test: /\.csv$/,
+                loader: "csv-loader",
+                options: {
+                    dynamicTyping: true,
+                    header: true,
+                    skipEmptyLines: true
+                }
             }
         ]
     },
