@@ -12,7 +12,7 @@ export default  class TradePolyline {
         } = params;
 
         const {
-            weight = 5
+            weight = 1
         } = options;
 
         return new AntPath(paths, {...options, weight});

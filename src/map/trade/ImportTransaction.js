@@ -2,7 +2,6 @@
  * Created by ace on 6/5/17.
  */
 import Transaction from './Transaction';
-import TradePolyline from './transport/TradePolyline';
 
 export default class ImportTransaction extends Transaction {
     constructor(params){

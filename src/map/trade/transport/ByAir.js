@@ -30,7 +30,7 @@ export default class ByAir extends ModeOfTransport{
         if (!proxy.options.icon){
             proxy.options.icon = L.icon({
                 iconUrl: AirPlaneIcon,
-                iconSize: [25, 25],
+                iconSize: [15, 15],
                 // className: "blinking"
             });
         };

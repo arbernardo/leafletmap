@@ -16,6 +16,13 @@ export default class TradeMarker {
             loop = true
         } = options;
 
-        return L.Marker.movingMarker(paths, durations, {...options, loop});
+        let p = paths.map(data => {
+            if(data.lng < 0) {
+                // console.log("lol");
+                data.lng += 1;
+            }
+            return new L.LatLng(data.lat, data.lng, true);
+        });
+        return L.Marker.movingMarker(p, durations, {...options, loop});
     }
 }

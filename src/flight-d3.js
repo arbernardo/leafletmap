@@ -25,18 +25,18 @@ const SW = [-179, -179];
 let map = L.map("mymap").setView([0, 0], 0);
 
 L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    // continuousWorld: false,
-    // noWrap: true,
-    // maxBoundsViscosity: 1.0,
-    // minZoom: 2,
-    // maxZoom: 5
+    continuousWorld: false,
+    noWrap: true,
+    maxBoundsViscosity: 1.0,
+    minZoom: 2,
+    maxZoom: 5
 }).addTo(map);
 
 map.setMaxBounds(L.latLngBounds(NE, SW));
 
 L.svg().addTo(map);
 
-let svg = d3.select("#mymap").select("svg"),
+let svg = d3.select("#mymap").append("svg"),
     g = svg.append("g");
 
 function projectPoint(x, y){
