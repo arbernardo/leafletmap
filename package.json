@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bezier-js": "^2.2.3",
     "d3": "^4.9.1",
     "leaflet": "^1.0.3",
     "leaflet-ant-path": "^0.6.4",

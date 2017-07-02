@@ -23,56 +23,63 @@ countries.forEach((data) => {
 });
 
 const IvoryCoast = countriesByCode.get("CI");
-console.log(IvoryCoast);
 
 const NE = [179, 179];
 const SW = [-179, -179];
 
 //Creating the map
-let mymap = L.map("mymap").setView(IvoryCoast, 2);
+let mymap = L.map("mymap").setView([0,0], 1);
 let tileProvider = [
     "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
     "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     "http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png"
 ]
 L.tileLayer(tileProvider[1], {
-    continuousWorld: false,
-    noWrap: true,
-    maxBoundsViscosity: 1.0,
-    minZoom: 2,
+    // continuousWorld: false,
+    // noWrap: true,
+    // maxBoundsViscosity: 1.0,
+    minZoom: 1,
     maxZoom: 5,
-    center: IvoryCoast
+    // center: [38, -97]
 }).addTo(mymap);
 
-mymap.setMaxBounds(L.latLngBounds(NE, SW));
+// mymap.setMaxBounds(L.latLngBounds(NE, SW));
 
-countries.forEach((data) => {
+// countries.forEach((data) => {
+//
+//     if (data.country != "CI") {
+//         let type = getRandom(1,2);
+//         switch(type) {
+//             case 1:
+//                 new ImportTransaction({
+//                     modeOfTransport: new ByAir({
+//                         marker: {durations: getRandom(5000, 20000)}
+//                     }),
+//                     from: IvoryCoast,
+//                     to: [data.latitude, data.longitude]
+//                 }).addTo(mymap).animate();
+//                 break;
+//
+//             case 2:
+//                 new ExportTransaction({
+//                     modeOfTransport: new ByAir({
+//                         marker: {durations: getRandom(5000, 20000)}
+//                     }),
+//                     from: IvoryCoast,
+//                     to: [data.latitude, data.longitude]
+//                 }).addTo(mymap).animate();
+//                 break;
+//
+//             default:
+//                 console.log("Something went wrong...");
+//         }
+//     }
+// });
 
-    if (data.country != "CI") {
-        let type = getRandom(1,2);
-        switch(type) {
-            case 1:
-                new ImportTransaction({
-                    modeOfTransport: new ByAir({
-                        marker: {durations: getRandom(5000, 20000)}
-                    }),
-                    from: IvoryCoast,
-                    to: [data.latitude, data.longitude]
-                }).addTo(mymap).animate();
-                break;
-
-            case 2:
-                new ExportTransaction({
-                    modeOfTransport: new ByAir({
-                        marker: {durations: getRandom(5000, 20000)}
-                    }),
-                    from: IvoryCoast,
-                    to: [data.latitude, data.longitude]
-                }).addTo(mymap).animate();
-                break;
-
-            default:
-                console.log("Something went wrong...");
-        }
-    }
-});
+new ExportTransaction({
+    modeOfTransport: new ByAir({
+        marker: {durations: getRandom(5000, 20000)}
+    }),
+    from: [38, -97],
+    to: [60, 100]
+}).addTo(mymap).animate();
