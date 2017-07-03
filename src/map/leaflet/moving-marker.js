@@ -299,7 +299,7 @@ L.Marker.MovingMarker = L.Marker.extend({
             this.setLatLng(p);
             var angleDeg = Math.atan2(p2.lng - p1.lng, p2.lat - p1.lat) * 180 / Math.PI;
             if (!this.doneOrigin){
-                this._icon.style[L.DomUtil.TRANSFORM+"Origin"] += "center";
+                this._icon.style[L.DomUtil.TRANSFORM+"Origin"] = "center";
                 this.doneOrigin = true;
             }
             this._icon.style[L.DomUtil.TRANSFORM] += ' rotateZ(' + angleDeg + 'deg)';

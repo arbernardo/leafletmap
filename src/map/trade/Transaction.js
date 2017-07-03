@@ -48,9 +48,11 @@ export default class Transaction {
         if (pathway.length) {
             //if there is pathway(s) then create a path for each to and from, ie. [from, ...pathway, to]
             //Allow for arrays of mode of transport.
+            modeOfTransport.length ? modeOfTransport[0].init(this.getType({from, pathway, to})) : modeOfTransport.init(this.getType({from, pathway, to}));
+
         } else {
             //initialize mode of transport
-            modeOfTransport.length ? modeOfTransport[0].init(this.getType(from, to)) : modeOfTransport.init(this.getType(from, to));
+            modeOfTransport.length ? modeOfTransport[0].init(this.getType({from, to})) : modeOfTransport.init(this.getType({from, to}));
         }
     }
 }

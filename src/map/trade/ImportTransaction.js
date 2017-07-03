@@ -12,8 +12,8 @@ export default class ImportTransaction extends Transaction {
         this.init();
     }
 
-    getType(p1, p2){
-        return [p2, p1];
+    getType({from, pathway = [], to}){
+        return [to, ...pathway.reverse(), from];
     }
 
     setDefaults(){

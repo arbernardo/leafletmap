@@ -11,8 +11,8 @@ export default class ExportTransaction extends Transaction {
         this.init();
     }
 
-    getType(p1, p2){
-        return [p1, p2];
+    getType({from, pathway = [], to}){
+        return [from, ...pathway, to];
     }
 
     setDefaults(){
