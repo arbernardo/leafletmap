@@ -55,4 +55,12 @@ export default class Transaction {
             modeOfTransport.length ? modeOfTransport[0].init(this.getType({from, to})) : modeOfTransport.init(this.getType({from, to}));
         }
     }
+
+    get marker() {
+        return this.modeOfTransport.marker;
+    }
+
+    get polyline(){
+        return this.modeOfTransport.polyline;
+    }
 }

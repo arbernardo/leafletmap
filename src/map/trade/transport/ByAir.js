@@ -87,7 +87,7 @@ export default class ByAir extends ModeOfTransport{
         }
 
         let paths = [].concat.apply([], pathArr);
-        this.createArc2();
+        // this.createArc2();
         return {
             pathArr,
             paths

@@ -17,7 +17,7 @@ export default class TradeMarker {
         const {
             loop = true
         } = options;
-        console.log("options",options)
+
         return L.Marker.movingMarker(paths, durations, {...options, loop});
     }
 

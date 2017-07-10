@@ -24,9 +24,13 @@ module.exports = {
                 loader: "url-loader"
             },
             {
-                test: /\.json$/,
+                test: /\.(json|txt)$/,
                 loader: "url-loader"
             },
+            // {
+            //     test: /\.(csv|tsv|psv)$/,
+            //     loader: "dsv-loader"
+            // }
             {
                 test: /\.csv$/,
                 loader: "csv-loader",
