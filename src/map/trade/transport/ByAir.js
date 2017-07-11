@@ -55,31 +55,8 @@ export default class ByAir extends ModeOfTransport{
         let pathArr = [];
         let vertices = this.vertices;
 
-        let originCount = 0,
-            destinationCount = 0;
-
         for (let i=0; i < points.length-1; i++){
             let origin = points[i], destination = points[i+1];
-
-            // if (origin[1] < 0) {
-            //     for (let [k,v] of countriesByName.entries()) {
-            //         if (v.includes(origin[1])){
-            //             cMap.set(k, v);
-            //         }
-            //     }
-            //     // origin[1] += 360;
-            //     originCount++;
-            // }
-            //
-            // if (destination[1] < 0) {
-            //     for (let [k,v] of countriesByName.entries()) {
-            //         if (v.includes(destination[1])){
-            //             cMap.set(k, v);
-            //         }
-            //     }
-            //     // destination[1] += 360;
-            //     destinationCount++;
-            // }
 
             let arc = this.createArc(origin, destination, {vertices: vertices[i] ? vertices[i]: vertices[vertices.length-1]});
 

@@ -5,7 +5,7 @@ import ModeOfTransport from './ModeOfTransport';
 import ShipIcon from '../../../assets/icons/ship.png';
 import IvoryCoast from '../../../data/ship-routes/IvoryCoast';
 
-const paths = IvoryCoast.paths;
+const ipaths = IvoryCoast.paths;
 
 export default class BySea extends ModeOfTransport{
     constructor(params = {}){
@@ -27,18 +27,17 @@ export default class BySea extends ModeOfTransport{
         if (!proxy.options.icon){
             proxy.options.icon = L.icon({
                 iconUrl: ShipIcon,
-                iconSize: [50, 25]
+                iconSize: [15, 15]
             });
         };
 
         Object.assign(this, {marker});
+        BySea.ctr++;
     }
 
     generatePaths(points){
         let pathArr = [];
-        let paths = [];
-
-        paths = IvoryCoast_Angola;
+        let paths = ipaths[BySea.ctr - 1];
 
         return {
             pathArr,

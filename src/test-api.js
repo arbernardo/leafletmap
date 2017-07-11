@@ -3,7 +3,9 @@
  */
 import './index.css';
 import L from 'leaflet';
+import Countries from './data/Countries';
 import TransactionUtil from './utils/TransactionUtil';
+import IvoryCoast from './data/ship-routes/IvoryCoast';
 
 const NE = [179, 179];
 const SW = [-179, -179];
@@ -21,13 +23,33 @@ L.tileLayer(tileProvider[3], {
     noWrap: true,
     maxBoundsViscosity: 1.0,
     minZoom: 1,
-    maxZoom: 7,
+    maxZoom: 10,
     // center: [38, -97]
 }).addTo(mymap);
 
 mymap.setMaxBounds(L.latLngBounds(NE, SW));
 
-TransactionUtil.generateRandomTransaction(mymap);
+// TransactionUtil.generateRandomTransaction(mymap);
 
+for (let x = 0; x < 10; x++){
+    let origin =  Countries.get("CI");
+    let destination = Countries.get(IvoryCoast.countries[x]);
+    console.log("destination", destination, IvoryCoast.countries);
+    if (destination) {
+        TransactionUtil.generateShipRoutes({map:mymap, origin, destination});
+    } else {
+        console.log("Destination is empty");
+    }
+}
+let data = [];
+mymap.on("click", (e) => {
+    let lat = e.latlng.lat;
+    let lng = e.latlng.lng;
+    // console.log(lat, lng);
+    data.push([lat,lng]);
+    console.log(data.forEach(d => {
+        console.log(`[${d[0]}, ${d[1]}]`);
+    }));
+});
 
 // mymap.removeLayer(e.modeOfTransport.polyline);

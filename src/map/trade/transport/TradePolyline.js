@@ -14,7 +14,7 @@ export default  class TradePolyline {
         const {
             weight = 1
         } = options;
-
+        console.log("paths from poly", paths);
         return new AntPath(paths, {...options, weight});
     }
 }
