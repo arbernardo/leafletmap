@@ -1,0 +1,152 @@
+p1 <- c(cntry.info$longitude[1],
+        cntry.info$latitude[1])
+p2 <- c(cntry.info$longitude[2],
+        cntry.info$latitude[2])
+
+bezier.curve <- function(p1, p2, p3) {
+  n <- seq(0,1,length.out=50)
+  bx <- (1-n)^2 * p1[[1]] +
+        (1-n) * n * 2 * p3[[1]] +
+        n^2 * p2[[1]]
+  by <- (1-n)^2 * p1[[2]] +
+        (1-n) * n * 2 * p3[[2]] +
+         n^2 * p2[[2]]
+
+  data.frame(lon=bx, lat=by)
+}
+
+bezier.arc <- function(p1, p2) {
+
+  intercept.long <- (p1[[1]] + p2[[1]]) / 2
+  intercept.lat  <- 85
+  p3 <- c(intercept.long, intercept.lat)
+
+  bezier.curve(p1, p2, p3)
+}
+
+arc3 <- bezier.arc(p1,p2)
+
+draw.map() +
+   geom_path(data=as.data.frame(arc3),
+             aes(x=lon, y=lat, group=NULL))
+
+
+#R version 3.3.2
+bezier.curve <- function(p1, p2, p3) {
+  n <- seq(0,1,length.out=50)
+  bx <- (1-n)^2 * p1[[1]] +
+        (1-n) * n * 2 * p3[[1]] +
+        n^2 * p2[[1]]
+  by <- (1-n)^2 * p1[[2]] +
+        (1-n) * n * 2 * p3[[2]] +
+         n^2 * p2[[2]]
+
+  data.frame(lon=bx, lat=by)
+}
+
+
+#long,lat
+p1 <- c(38,-97)
+p2 <- c(60,100)
+pp1 <- p1
+pp2 <- p2
+pp1[2] <- asinh(tan(p1[2]/180 * pi))/pi * 180
+pp2[2] <- asinh(tan(p2[2]/180 * pi))/pi * 180
+
+print(pp1)
+print(pp2)
+
+u <- pp2 - pp1
+paste("u1", u)
+u <- u / sqrt(sum(u*u))
+
+paste("u2", u)
+
+d <- sqrt(sum((p1-p2)^2))
+print(d)
+m <- d / 2
+h <- floor(d * .2)
+
+print(m)
+print(h)
+
+a <- c(0,0)
+b <- c(d,0)
+c <- c(m, h)
+
+bc = bezier.curve(a, b, c)
+print(bc)
+#mx <- as.matrix(bc)
+#print(mx)
+
+------------------------------------------
+
+p1 = [long, lat]
+p2 = [long, lat]
+
+curve(p1, p2, p3){
+    n = sequence of numbers (from, to, length of array = 50);
+
+    bx = ((1-n)^2 * p1[0]) + ((1-n) * n * 2 * p3[0]) + (n^2 * p2[0])
+
+    by = ((1-n)^2 * p1[1]) + ((1-n) * n * 2 * p3[1]) + (n^2 * p2[1])
+
+    where: (1-n) will reverse the array
+           (n)^2 will square each element from array
+           (n)*p will multiply each element of n with p.
+
+    return {lon: bx, lat: by}
+}
+
+//Code for Sequence of Numbers with length out
+function seq(from, to, length) {
+  let array = [];
+
+  let increment = length ? (to-from)/(length-1) : 1;
+  let loop = length ? length-1 : to - from;
+
+  for (let x = 0; x < loop; x++) {
+    array.push(from + (x*increment))
+  }
+
+  array.push(to);
+  return array;
+}
+
+//Applying ooperations for each element in array
+function applyOperation(operator, operand, arrayKey){
+  const isArray = operand.length ? true : false;
+  const operation = {
+    "*": (x, o)=> x*o,
+    "-": (x, o)=> x-o,
+    "+": (x, o)=> x+o,
+    "/": (x, o)=> x/o,
+    "^": (x, o)=> Math.pow(x, o)
+  }
+
+  return this.map((d, i) => d[arrayKey] ? operation[operator](d[arrayKey], isArray ? operand[i] : operand) :
+                                          operation[operator](d, isArray ? operand[i] : operand));
+}
+Array.prototype.applyOperation = applyOperation;
+
+function curve(p1, p2, p3) {
+  let n = seq(0,1,15);
+
+  let lat = [...n].applyOperation("*",-1)
+             .applyOperation("+", 1)
+             .applyOperation("^",2)
+             .applyOperation("*", p1[0])
+             .applyOperation("+", ([...n].applyOperation("*", -1).applyOperation("+", 1).applyOperation("*", [...n]).applyOperation("*", 2).applyOperation("*", p3[0])))
+             .applyOperation("+", ([...n].applyOperation("^", 2).applyOperation("*", p2[0])));
+
+  let lng = [...n].applyOperation("*",-1)
+             .applyOperation("+", 1)
+             .applyOperation("^",2)
+             .applyOperation("*", p1[1])
+             .applyOperation("+", ([...n].applyOperation("*", -1).applyOperation("+", 1).applyOperation("*", [...n]).applyOperation("*", 2).applyOperation("*", p3[1])))
+             .applyOperation("+", ([...n].applyOperation("^", 2).applyOperation("*", p2[1])));
+  return {lat, lng};
+
+}
+
+console.log(curve([1,1], [2,2], [3,3]));
