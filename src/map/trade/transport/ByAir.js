@@ -5,20 +5,7 @@ import L from 'leaflet';
 import 'leaflet-arc';
 import ModeOfTransport from './ModeOfTransport';
 import AirPlaneIcon from '../../../assets/icons/airplane.png';
-import countries from '../../../data/countries.csv';
-import Bezier from 'bezier-js';
-
-//Usage
-// new ByAir({marker: {...options}, polyline: {...options}})
-const countriesByCode = new Map();
-const countriesByName = new Map();
-
-countries.forEach((data) => {
-    countriesByCode.set(data.country, [data.latitude, data.longitude]);
-    countriesByName.set(data.name, [data.latitude, data.longitude]);
-});
-
-const cMap = new Map();
+import {getArcPoints} from '../../../utils/Util';
 
 export default class ByAir extends ModeOfTransport{
     constructor(params = {}){
@@ -58,9 +45,9 @@ export default class ByAir extends ModeOfTransport{
         for (let i=0; i < points.length-1; i++){
             let origin = points[i], destination = points[i+1];
 
-            let arc = this.createArc(origin, destination, {vertices: vertices[i] ? vertices[i]: vertices[vertices.length-1]});
+            let arc = this.createArc(origin, destination);
 
-            pathArr.push(arc._latlngs);
+            pathArr.push(arc);
         }
 
         let paths = [].concat.apply([], pathArr);
@@ -72,11 +59,6 @@ export default class ByAir extends ModeOfTransport{
     }
 
     createArc(origin, destination) {
-        return L.Polyline.Arc(origin, destination, {vertices: this.vertices});
-    }
-
-    createArc2(origin, destination) {
-        var curve = new Bezier(150,40 , 80,30 , 105,150);
-        console.log(curve);
+        return getArcPoints(origin, destination).map(arr => L.latLng(arr[0], arr[1]));
     }
 }

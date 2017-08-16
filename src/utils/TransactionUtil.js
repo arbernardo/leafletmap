@@ -32,7 +32,7 @@ function generateTransaction({map, origin, destination, pathway = []}) {
         case 1:
             transaction = new ImportTransaction({
                 modeOfTransport: new ByAir({
-                    marker: {durations: getRandomNumber(30000, 60000)}
+                    marker: {durations: getRandomNumber(120000, 240000)}
                 }),
                 from: origin.latlng,
                 pathway: [pathway[0].latlng],
@@ -46,7 +46,7 @@ function generateTransaction({map, origin, destination, pathway = []}) {
         case 2:
             transaction = new ExportTransaction({
                 modeOfTransport: new ByAir({
-                    marker: {durations: getRandomNumber(30000, 60000)}
+                    marker: {durations: getRandomNumber(120000, 240000)}
                 }),
                 from: origin.latlng,
                 pathway: pathway.map((d) => d.latlng),
