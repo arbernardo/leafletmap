@@ -21,7 +21,7 @@ export default class ExportTransaction extends Transaction {
         } = this.modeOfTransport;
 
         if (polyline !== "none" && !polyline.color){
-            this.modeOfTransport.polyline = {color: "blue"};
+            this.modeOfTransport.polyline = {color: "blue", pulseColor: "blue"};
         }
     }
 

@@ -18,11 +18,19 @@ function generateTransaction({map, origin, destination, pathway = []}) {
 
     let marker, transaction;
     let mouseOver = function(){
+        let antPathId = this.parent.polyline._animatedPathId;
+        let path = document.querySelector(`.${antPathId}`);
+        path.classList.toggle("path-hover");
+
         this.pause();
         this.openPopup();
     };
 
     let mouseOut = function(){
+        let antPathId = this.parent.polyline._animatedPathId;
+        let path = document.querySelector(`.${antPathId}`);
+        path.classList.toggle("path-hover");
+
         this.resume();
         this.closePopup();
     };
@@ -36,7 +44,8 @@ function generateTransaction({map, origin, destination, pathway = []}) {
                 }),
                 from: origin.latlng,
                 pathway: [pathway[0].latlng],
-                to: destination.latlng
+                to: destination.latlng,
+                description: `${origin.name} - ${destination.name}`
             }).addTo(map).animate();
 
             marker = transaction.marker.bindPopup(`<b>Import!</b> ${popup}`);
@@ -50,7 +59,8 @@ function generateTransaction({map, origin, destination, pathway = []}) {
                 }),
                 from: origin.latlng,
                 pathway: pathway.map((d) => d.latlng),
-                to: destination.latlng
+                to: destination.latlng,
+                description: `${origin.name} - ${destination.name}`
             }).addTo(map).animate();
 
             marker = transaction.marker.bindPopup(`<b>Export!</b> ${popup}`);
@@ -63,18 +73,6 @@ function generateTransaction({map, origin, destination, pathway = []}) {
 
     marker.on("mouseover", mouseOver);
     marker.on("mouseout", mouseOut);
-}
-
-function getRandomModeOfTransport(params) {
-    let randomN = getRandom(1, 2);
-    let modeOfTransport;
-
-    // switch(randomN) {
-    //     case 1:
-    //         new ByAir()
-    // }
-
-    return modeOfTransport;
 }
 
 function generateRandomTransaction(map, offset = 10, n = 10) {
@@ -94,11 +92,19 @@ function generateShipRoutes({map, origin, destination, pathway = []}) {
 
     let marker, transaction;
     let mouseOver = function(){
+        let antPathId = this.parent.polyline._animatedPathId;
+        let path = document.querySelector(`.${antPathId}`);
+        path.classList.toggle("path-hover");
+
         this.pause();
         this.openPopup();
     };
 
     let mouseOut = function(){
+        let antPathId = this.parent.polyline._animatedPathId;
+        let path = document.querySelector(`.${antPathId}`);
+        path.classList.toggle("path-hover");
+
         this.resume();
         this.closePopup();
     };
@@ -111,7 +117,8 @@ function generateShipRoutes({map, origin, destination, pathway = []}) {
                     marker: {durations: getRandomNumber(100000, 120000)}
                 }),
                 from: origin.latlng,
-                to: destination.latlng
+                to: destination.latlng,
+                description: `${origin.name} - ${destination.name}`
             }).addTo(map).animate();
 
             marker = transaction.marker.bindPopup(`<b>Import!</b> ${popup}`);
@@ -124,7 +131,8 @@ function generateShipRoutes({map, origin, destination, pathway = []}) {
                     marker: {durations: getRandomNumber(100000, 120000)}
                 }),
                 from: origin.latlng,
-                to: destination.latlng
+                to: destination.latlng,
+                description: `${origin.name} - ${destination.name}`
             }).addTo(map).animate();
 
             marker = transaction.marker.bindPopup(`<b>Export!</b> ${popup}`);
@@ -139,7 +147,7 @@ function generateShipRoutes({map, origin, destination, pathway = []}) {
     marker.on("mouseout", mouseOut);
 }
 
-module.exports = {
+export default {
     generateRandomTransaction,
     generateShipRoutes
 }

@@ -9,8 +9,6 @@ export default class TradeMarker {
         const {
             paths,
             durations = 4000,
-            // icon,
-            // loop,
             options = {}
         } = params;
 

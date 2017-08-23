@@ -12,9 +12,10 @@ export default  class TradePolyline {
         } = params;
 
         const {
-            weight = 1
+            weight = 5,
+            className = "marker-ant-path"
         } = options;
 
-        return new AntPath(paths, {...options, weight});
+        return new AntPath(paths, {...options, weight, className});
     }
 }

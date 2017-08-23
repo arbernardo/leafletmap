@@ -40,12 +40,14 @@ export default class ModeOfTransport {
 
         if (!(marker instanceof L.Marker)) {
             this.marker = this.defaultMarker();
+            this.marker.parent = this;
         }
 
         if (polyline !== "none"){
             if (!(polyline instanceof L.Polyline)){
                 this.polyline = this.defaultPolyline();
             }
+            this.polyline.parent = this;
         }
     }
 }

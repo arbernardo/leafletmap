@@ -22,7 +22,7 @@ export default class ImportTransaction extends Transaction {
         } = this.modeOfTransport;
 
         if (polyline !== "none" && !polyline.color){
-            this.modeOfTransport.polyline = {color: "red"};
+            this.modeOfTransport.polyline = {color: "red", pulseColor: "red"};
         }
     }
 }

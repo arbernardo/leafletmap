@@ -3,17 +3,35 @@
  */
 
 export default class Transaction {
+
+    static layerControl;
+
     constructor({
         modeOfTransport,
         pathway = [],
         from,
-        to
+        to,
+        description
     }){
 
         if (!modeOfTransport || !from || !to) {
             console.error("route, from, and to attributes are required.");
         } else {
-            Object.assign(this, {modeOfTransport, pathway, from, to});
+            Object.assign(this, {modeOfTransport, pathway, from, to, description});
+        }
+    }
+
+    static addToLayers(description, layerGroup, map) {
+        if (!Transaction.layerControl) {
+            let layerGroups = {};
+            layerGroups[description] = layerGroup;
+            Transaction.layerControl = L.control.layers(null, layerGroups);
+            Transaction.layerControl.layerGroups = layerGroups;
+
+            console.log(Transaction.layerControl.layerGroups);
+            Transaction.layerControl.addTo(map);
+        } else {
+            // Transaction.layerControl.layerGroups[description] = layerGroup;
         }
     }
 
@@ -23,8 +41,13 @@ export default class Transaction {
             polyline
         } = this.modeOfTransport;
 
-        marker.addTo(map);
-        if (polyline !== "none") polyline.addTo(map);
+        let l = L.layerGroup([marker]);
+        if (polyline !== "none") l.addLayer(polyline);
+
+        map.addLayer(l);
+
+        //add Custom Control.
+        Transaction.addToLayers(this.description, l, map);
 
         return this;
     }

@@ -1,3 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    text-rendering: optimizeLegibility;
+}
+
+.row {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+header {
+    /*background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));!*url(assets/css/img/bg1.jpg);*!*/
+    /*-webkit-background-size: cover;*/
+    /*background-size: cover;*/
+    /*background-position: center;*/
+    /*height: 100vh;*/
+}
+
+h1 {
+    /*color: #fff;*/
+    margin: 0 15%;
+    text-align: center;
+}
+
+h1:after {
+    content: "";
+}
+
 #mymap {
     height: 700px;
     width: 100%;
@@ -5,11 +41,25 @@
     overflow: hidden;
 }
 
-/*.circles {*/
-    /*stroke: "black";*/
-    /*opacity: .6;*/
-    /*fill: "red"*/
-/*}*/
+
+.marker-ant-path {
+    opacity: 0;
+}
+
+.leaflet-ant-path {
+    opacity: .25;
+    transition: opacity .2s;
+}
+
+.marker-ant-path:hover + .leaflet-ant-path,
+.path-hover {
+    opacity: 1;
+}
+
+.leaflet-ant-path:hover {
+    opacity: 1;
+}
+
 
 @keyframes fade {
     from { opacity: 0.5; }

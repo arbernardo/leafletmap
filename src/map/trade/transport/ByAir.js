@@ -29,7 +29,7 @@ export default class ByAir extends ModeOfTransport{
             proxy.options.icon = L.icon({
                 iconUrl: AirPlaneIcon,
                 iconSize: [15, 15],
-                // className: "blinking"
+                className: "airplane-icon"
             });
         };
 
@@ -51,7 +51,7 @@ export default class ByAir extends ModeOfTransport{
         }
 
         let paths = [].concat.apply([], pathArr);
-        // this.createArc2();
+
         return {
             pathArr,
             paths
