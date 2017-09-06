@@ -14,9 +14,10 @@ let tileProvider = [
     "http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
     "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     "http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png",
-    "http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
+    "http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+    "http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey={apikey}"
 ];
-L.tileLayer(tileProvider[3], {
+L.tileLayer(tileProvider[4], {
     continuousWorld: false,
     noWrap: true,
     maxBoundsViscosity: 1.0,

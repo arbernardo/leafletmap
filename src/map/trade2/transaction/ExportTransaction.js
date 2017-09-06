@@ -1,0 +1,12 @@
+/**
+ * Created by ace on 9/6/17.
+ */
+
+
+import Transaction from './Transaction';
+
+export default class ExportTransaction extends Transaction {
+    constructor() {
+        super();
+    }
+}
